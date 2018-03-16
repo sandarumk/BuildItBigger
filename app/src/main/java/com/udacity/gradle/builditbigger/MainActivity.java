@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.sandarumk.jokedisplayer.DisplayJokeActivity;
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        EndpointsAsyncTask jokeProviderTask = new EndpointsAsyncTask();
+        EndpointsAsyncTask jokeProviderTask = new EndpointsAsyncTask(view.getRootView());
         Context context = getApplicationContext();
         jokeProviderTask.execute(context);
     }
@@ -66,6 +67,20 @@ public class MainActivity extends AppCompatActivity {
 class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private ProgressBar spinner;
+    private View mRootView;
+
+    public EndpointsAsyncTask(View rootview) {
+        mRootView = rootview;
+        spinner = (ProgressBar) mRootView.findViewById(R.id.pv_spinner);
+        spinner.setVisibility(View.INVISIBLE);
+    }
+
+    protected void onPreExecute() {
+        //textView.setText("Hello !!!");
+        spinner.setVisibility(View.VISIBLE);
+        super.onPreExecute();
+    }
 
     @Override
     protected String doInBackground(Context... params) {
@@ -97,6 +112,7 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        spinner.setVisibility(View.INVISIBLE);
         Intent newActivityIntent = new Intent(context, DisplayJokeActivity.class);
         newActivityIntent.putExtra(DisplayJokeActivity.JOKE, result);
         context.startActivity(newActivityIntent);
