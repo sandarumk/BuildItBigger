@@ -6,11 +6,16 @@
     android:layout_height="match_parent"
     tools:context="com.example.sandarumk.jokedisplayer.DisplayJokeActivity">
 
-    <TextView
-        android:id="@+id/tv_joke"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="56sp"
-        android:layout_margin="16dp"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_joke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="56sp"
+            android:layout_margin="16dp" />
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
