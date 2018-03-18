@@ -21,7 +21,6 @@ import java.io.IOException;
 
 import static com.google.api.client.extensions.android.http.AndroidHttp.newCompatibleTransport;
 
-
 public class MainActivity extends AppCompatActivity {
 
     public static String TAG = MainActivity.class.getSimpleName();
@@ -65,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 }
 
 class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
+    private static final String API_URL = "http://10.0.2.2:8080/_ah/api/";
     private static MyApi myApiService = null;
     private Context context;
     private ProgressBar spinner;
@@ -77,7 +77,7 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
     }
 
     protected void onPreExecute() {
-        //textView.setText("Hello !!!");
+
         spinner.setVisibility(View.VISIBLE);
         super.onPreExecute();
     }
@@ -90,7 +90,7 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
                     // options for running against local devappserver
                     // - 10.0.2.2 is localhost's IP address in Android emulator
                     // - turn off compression when running against local devappserver
-                    .setRootUrl("http://10.0.2.2:8080/_ah/api/")
+                    .setRootUrl(API_URL)
                     .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                         @Override
                         public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
