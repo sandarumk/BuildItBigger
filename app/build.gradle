@@ -32,17 +32,22 @@ android {
     flavorDimensions "production"
     productFlavors {
 
-        free{
+        free {
             dimension "production"
             applicationId "com.udacity.gradle.builditbigger.free"
         }
 
-        paid{
+        paid {
             dimension "production"
             applicationId "com.udacity.gradle.builditbigger.paid"
 
         }
 
+    }
+    sourceSets {
+        free {
+            manifest.srcFile 'src/free/AndroidManifest.xml'
+        }
     }
 }
 
@@ -50,16 +55,14 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     endpointsServer project(path: ':backend', configuration: 'endpoints')
     implementation 'com.android.support:appcompat-v7:27.0.2'
-    implementation 'com.google.android.gms:play-services-ads:11.8.0'
+    freeCompile 'com.google.android.gms:play-services-ads:11.8.0'
     implementation 'com.google.api-client:google-api-client:1.23.0'
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
     implementation 'com.google.code.findbugs:jsr305:3.0.1'
-//    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
     compile project(':JokeTeller')
     compile project(':jokedisplayer')
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:1.10.19'
-//    testImplementation 'com.android.support.test:testing-support-lib:0.1'
     androidTestCompile 'com.android.support:support-annotations:23.4.0'
     androidTestCompile 'com.android.support.test:rules:0.5'
     androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1') {

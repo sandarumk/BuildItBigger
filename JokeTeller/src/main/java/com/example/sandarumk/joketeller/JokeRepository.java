@@ -13,7 +13,7 @@ public class JokeRepository {
 
     public String getARandomJoke() {
         createJokesMap();
-        int randomNumber = (int) (Math.random() * 20) + 1;
+        int randomNumber = (int) (Math.random() * jokesMap.size()) + 1;
         System.out.println("Random Number: "+ randomNumber);
         String joke = jokesMap.get(randomNumber);
         System.out.println("Joke :"+joke);

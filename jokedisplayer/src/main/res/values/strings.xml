@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JokeDisplayer</string>
+    <string name="no_jokes_error">No Joke Found. Try Again Later</string>
 </resources>
